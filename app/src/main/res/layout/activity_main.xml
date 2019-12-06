@@ -7,22 +7,16 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <EditText
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter Phone Number"
-        android:id="@+id/phoneNumberEditText" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Enter Code"
-        android:id="@+id/codeEditText" />
+        android:text="Find User"
+        android:id="@+id/findUserButton"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send Verification Code"
-        android:id="@+id/loginButton"/>
+        android:text="Logout"
+        android:id="@+id/logoutButton"/>
 
 </LinearLayout>
