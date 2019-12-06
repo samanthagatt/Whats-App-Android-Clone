@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.database.Cursor;
 import android.os.Bundle;
-import android.text.Layout;
-import android.widget.LinearLayout;
+import android.provider.ContactsContract;
 
 import java.util.ArrayList;
 
@@ -27,6 +27,7 @@ public class FindUserActivity extends AppCompatActivity {
         mUserList = new ArrayList<>();
 
         setupUserListRecyclerView();
+        getContactList();
     }
 
     private void setupUserListRecyclerView() {
@@ -40,5 +41,17 @@ public class FindUserActivity extends AppCompatActivity {
 
         mUserListAdapter = new UserListAdapter(mUserList);
         mUserListRecyclerView.setAdapter(mUserListAdapter);
+    }
+
+    private void getContactList() {
+        Cursor mContacts = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
+        while(mContacts.moveToNext()) {
+            String mName = mContacts.getString(mContacts.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            String mPhoneNumber = mContacts.getString(mContacts.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+            UserObject mUser = new UserObject(mName, mPhoneNumber);
+            mUserList.add(mUser);
+            mUserListAdapter.notifyDataSetChanged();
+        }
     }
 }

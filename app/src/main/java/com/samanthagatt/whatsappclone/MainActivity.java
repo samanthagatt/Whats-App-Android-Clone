@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
         mCodeEditText = findViewById(R.id.codeEditText);
         final Button mLoginButton = findViewById(R.id.loginButton);
 
-        mCodeEditText.setVisibility(View.INVISIBLE);
-
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
@@ -59,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
 
-                mCodeEditText.setVisibility(View.VISIBLE);
                 mLoginButton.setText("Verify Phone Number");
 
                 mVerificationCode = s;
@@ -101,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                             presentLoggedInActivityIfAble();
                         } else {
                             // TODO: Handle exception
+                            Log.println(Log.DEBUG, "Task not successful", task.getException().toString());
                         }
                     }
                 }
