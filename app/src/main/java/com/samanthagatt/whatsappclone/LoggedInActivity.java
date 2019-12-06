@@ -25,6 +25,14 @@ public class LoggedInActivity extends AppCompatActivity {
                 presentLoginActivity();
             }
         });
+
+        Button mFindUserButton = findViewById(R.id.findUserButton);
+        mFindUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), FindUserActivity.class));
+            }
+        });
     }
 
     private void presentLoginActivity() {
